@@ -16,4 +16,4 @@ def enviar_dte(dte_data: DteRequest):
     if response.status_code == 200:
         return response.json()
     else:
-        raise HTTPException(status_code=400, detail="Error enviando DTE")
+        raise HTTPException(status_code=400, detail=response.text)
