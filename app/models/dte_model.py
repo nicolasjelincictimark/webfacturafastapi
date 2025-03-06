@@ -1,5 +1,6 @@
+
 from pydantic import BaseModel
-from typing import List, Dict, Any
+from typing import List, Dict
 
 class IdDoc(BaseModel):
     TipoDTE: str
@@ -52,11 +53,13 @@ class Documento(BaseModel):
     Detalle: Detalle
     _ID: str
 
-class DTE(BaseModel):
+class DteItem(BaseModel):
     Documento: Documento
+
+class DTE(BaseModel):
+    Dte: List[DteItem]  # 🚀 CAMBIO: Ahora `Dte` es una lista
     _xmlns: str
     _version: str
 
 class DteRequest(BaseModel):
     DTE: DTE
-
