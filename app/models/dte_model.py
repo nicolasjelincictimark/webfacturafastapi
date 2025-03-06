@@ -56,7 +56,7 @@ class DteItem(BaseModel):
     Documento: Documento
 
 class DTE(BaseModel):
-    Dte: List[DteItem]  # 🚀 AHORA `Dte` ES UNA LISTA ✅
+    Dte: List[DteItem]  # ✅ SE CORRIGE PARA QUE "Dte" SEA UNA LISTA
     _xmlns: str
     _version: str
 
