@@ -6,30 +6,28 @@ class IdDoc(BaseModel):
     Folio: str
     FchEmis: str
     FmaPago: str
-    TermPagoGlosa: str
     FchVenc: str
 
 class Emisor(BaseModel):
     RUTEmisor: str
     RznSoc: str
     GiroEmis: str
+    CorreoEmisor: str
     Acteco: str
     DirOrigen: str
     CmnaOrigen: str
-    CiudadOrigen: str
 
 class Receptor(BaseModel):
     RUTRecep: str
     RznSocRecep: str
     GiroRecep: str
+    Contacto: str
     CorreoRecep: str
     DirRecep: str
     CmnaRecep: str
-    CiudadRecep: str
 
 class Totales(BaseModel):
     MntNeto: str
-    MntExe: str
     TasaIVA: str
     IVA: str
     MntTotal: str
@@ -40,9 +38,8 @@ class Encabezado(BaseModel):
     Receptor: Receptor
     Totales: Totales
 
-class DetalleItem(BaseModel):
-    NroLinDet: int
-    CdgItem: Dict[str, str]
+class Detalle(BaseModel):
+    NroLinDet: str
     NmbItem: str
     DscItem: str
     QtyItem: str
@@ -50,12 +47,16 @@ class DetalleItem(BaseModel):
     PrcItem: str
     MontoItem: str
 
-class DteData(BaseModel):
+class Documento(BaseModel):
     Encabezado: Encabezado
-    Detalles: List[DetalleItem]
+    Detalle: Detalle
+    _ID: str
 
-class DteSend(BaseModel):
-    Dte: List[DteData]
+class DTE(BaseModel):
+    Documento: Documento
+    _xmlns: str
+    _version: str
 
 class DteRequest(BaseModel):
-    DteSend: DteSend
+    DTE: DTE
+
