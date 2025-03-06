@@ -1,8 +1,6 @@
-
 from pydantic import BaseModel
-from typing import List, Dict
+from typing import List, Dict, Any
 
-# Estructura para el encabezado del documento
 class IdDoc(BaseModel):
     TipoDTE: str
     Folio: str
@@ -42,7 +40,6 @@ class Encabezado(BaseModel):
     Receptor: Receptor
     Totales: Totales
 
-# Estructura para los detalles del documento
 class DetalleItem(BaseModel):
     NroLinDet: int
     CdgItem: Dict[str, str]
@@ -53,7 +50,6 @@ class DetalleItem(BaseModel):
     PrcItem: str
     MontoItem: str
 
-# Estructura principal del documento
 class DteData(BaseModel):
     Encabezado: Encabezado
     Detalles: List[DetalleItem]
@@ -63,3 +59,4 @@ class DteSend(BaseModel):
 
 class DteRequest(BaseModel):
     DteSend: DteSend
+
