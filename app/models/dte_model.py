@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List, Dict
+from typing import List
 
 class IdDoc(BaseModel):
     TipoDTE: str
@@ -47,16 +47,13 @@ class Detalle(BaseModel):
     PrcItem: str
     MontoItem: str
 
-class Documento(BaseModel):
+class DteItem(BaseModel):
     Encabezado: Encabezado
-    Detalle: Detalle
+    Detalle: List[Detalle]  # ✅ AHORA ES UNA LISTA
     _ID: str
 
-class DteItem(BaseModel):
-    Documento: Documento
-
 class DTE(BaseModel):
-    Dte: List[DteItem]  # ✅ SE CORRIGE PARA QUE "Dte" SEA UNA LISTA
+    Dte: List[DteItem]  # ✅ AHORA ES UNA LISTA
     _xmlns: str
     _version: str
 
