@@ -1,33 +1,37 @@
-from pydantic import BaseModel
-from typing import List
 
+from pydantic import BaseModel
+from typing import List, Dict
+
+# Estructura para el encabezado del documento
 class IdDoc(BaseModel):
     TipoDTE: str
     Folio: str
     FchEmis: str
     FmaPago: str
+    TermPagoGlosa: str
     FchVenc: str
 
 class Emisor(BaseModel):
     RUTEmisor: str
     RznSoc: str
     GiroEmis: str
-    CorreoEmisor: str
     Acteco: str
     DirOrigen: str
     CmnaOrigen: str
+    CiudadOrigen: str
 
 class Receptor(BaseModel):
     RUTRecep: str
     RznSocRecep: str
     GiroRecep: str
-    Contacto: str
     CorreoRecep: str
     DirRecep: str
     CmnaRecep: str
+    CiudadRecep: str
 
 class Totales(BaseModel):
     MntNeto: str
+    MntExe: str
     TasaIVA: str
     IVA: str
     MntTotal: str
@@ -38,8 +42,10 @@ class Encabezado(BaseModel):
     Receptor: Receptor
     Totales: Totales
 
-class Detalle(BaseModel):
-    NroLinDet: str
+# Estructura para los detalles del documento
+class DetalleItem(BaseModel):
+    NroLinDet: int
+    CdgItem: Dict[str, str]
     NmbItem: str
     DscItem: str
     QtyItem: str
@@ -47,15 +53,13 @@ class Detalle(BaseModel):
     PrcItem: str
     MontoItem: str
 
-class DteItem(BaseModel):
+# Estructura principal del documento
+class DteData(BaseModel):
     Encabezado: Encabezado
-    Detalle: List[Detalle]  # ✅ AHORA ES UNA LISTA
-    _ID: str
+    Detalles: List[DetalleItem]
 
-class DTE(BaseModel):
-    Dte: List[DteItem]  # ✅ AHORA ES UNA LISTA
-    _xmlns: str
-    _version: str
+class DteSend(BaseModel):
+    Dte: List[DteData]
 
 class DteRequest(BaseModel):
-    DTE: DTE
+    DteSend: DteSend
