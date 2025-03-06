@@ -1,4 +1,3 @@
-
 from pydantic import BaseModel
 from typing import List, Dict
 
@@ -57,7 +56,7 @@ class DteItem(BaseModel):
     Documento: Documento
 
 class DTE(BaseModel):
-    Dte: List[DteItem]  # 🚀 CAMBIO: Ahora `Dte` es una lista
+    Dte: List[DteItem]  # 🚀 AHORA `Dte` ES UNA LISTA ✅
     _xmlns: str
     _version: str
 
